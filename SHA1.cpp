@@ -106,7 +106,7 @@ unsigned int h[5] = {0,
                      0,
                      0,
                      0};
-unsigned int k[4];
+unsigned int k[4]; // Encryption Key
 unsigned int w[80];
 string input_data;
 
@@ -145,17 +145,17 @@ unsigned int fPlusK(int i, unsigned int B, unsigned int C, unsigned int D)
     return -1;
 }
 
-void initWords(unsigned int m[16])
+void processWords(unsigned int block[16])
 {
     for (int i = 0; i < 16; i++)
-        w[i] = m[i];
+        w[i] = block[i];
     for (int i = 16; i < 80; i++)
         w[i] = rotateToLeft(1, (w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16]));
 }
 
-void processBlock(unsigned int m[16])
+void processBlock(unsigned int block[16])
 {
-    initWords(m);
+    processWords(block);
     unsigned int a = h[0];
     unsigned int b = h[1];
     unsigned int c = h[2];
@@ -186,6 +186,7 @@ void runHashProcess()
 {
     for (int i = 0; i < input_data.length(); i += 64)
     {
+        // This part picks the current block to be hashed.
         unsigned int current_block[16];
         for (int j = 0; j < 64; j++)
         {
