@@ -80,17 +80,16 @@ string convertTo32bit(unsigned int x)
 
 string convertToHexadecimal(unsigned int x)
 {
+    string result = "";
 
-    char temp[8];
     for (int i = 0; i < 8; i++)
     {
-        temp[i] = switchToHexadecimal(x % 16);
+        result += switchToHexadecimal(x % 16);
         x /= 16;
     }
 
-    string result = "";
-    for (int i = 7; i >= 0; i--)
-        result += temp[i];
+    for (int i = 0; i < result.length() / 2; i++)
+        swap(result[i], result[result.length() - i - 1]);
 
     return result;
 }
