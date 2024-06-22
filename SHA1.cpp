@@ -176,7 +176,7 @@ void processBlock(unsigned int block[16])
 
 unsigned int createPadding()
 {
-    // This function determines the data that would be added to complete the data-block.
+    // This function determines the characters needed to complete the unfulfilled data-block.
     // 0 is my default value.
     return 0;
 }
